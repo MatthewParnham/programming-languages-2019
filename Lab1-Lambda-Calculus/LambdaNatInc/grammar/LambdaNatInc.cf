@@ -7,8 +7,8 @@ EAbs.   Exp1 ::= "\\" Id "." Exp ;  -- in effect: "\" Id "." Exp ; -- btw, prono
 EApp.   Exp2 ::= Exp2 Exp3 ; -- application associates on the left
 EVar.   Exp3 ::= Id ;
 ENat.   Exp3 ::= Exp4 ;
-EZer.   Exp4 ::= "0" ;
-EInc.   Exp4 ::= "S" Exp3 ; -- "S" is now a terminal and cannot be parsed (or lexed) as an identifier (variable)
+Nat0.   Exp4 ::= "0" ;
+NatI.   Exp4 ::= "S" Exp3 ; -- "S" is now a terminal and cannot be parsed (or lexed) as an identifier (variable)
 
 coercions Exp 3 ;
 
