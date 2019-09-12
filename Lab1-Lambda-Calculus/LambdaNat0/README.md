@@ -2,12 +2,12 @@
 
 To run a program in the language LambdaNat:
 
-- download this directory
+- Install [Docker](https://docs.docker.com/install/).
 
-- run `stack build` in this directory from a terminal (needs Haskell)
+- Change into this folder.
 
-- run `stack exec LambdaNat-exe test/test-xxyz.lc` to execute the program `test-xxyz.lc` in the directory `test`
+- Run `docker build . -t lambsnat`.
+
+- Run `echo "\x.x" | docker run -i --rm temp` to test input.
 
 If you just want to parse a program in the language Lambda Nat, see [here](https://github.com/alexhkurz/programming-languages-2019/tree/master/Lambda-Calculus/LambdaNat/grammar#readme).
-
-  
