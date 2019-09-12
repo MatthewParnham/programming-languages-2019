@@ -11,7 +11,7 @@ RUN cabal new-install alex-3.2.4 happy-1.19.12
 
 # Copy and generate grammer code
 COPY LambdaNat1.cf ./
-RUN bnfc -m -haskell LambdaNat0.cf
+RUN bnfc -m -haskell LambdaNat1.cf
 RUN make
 
 # Execute the binary
