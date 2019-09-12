@@ -22,6 +22,8 @@ The following commands can help debugging issues when building.
 
 `docker run -it --rm lambdanat bash` to inspect the building stage.
 
+The `/grammar` folder also has a Dockerfile only for running the parser, although it can't generate a binary executable. 
+
 ## Saving Image
 
 Save the image with: `docker save lambdanat > lambdanat.tar`.
