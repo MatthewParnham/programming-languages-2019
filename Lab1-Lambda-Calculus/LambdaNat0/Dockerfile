@@ -33,7 +33,7 @@ CMD ["cabal", "new-exec", "LambdaNat-exe"]
 
 # Stage 2, pure binary
 
-FROM scratch
+FROM alpine:latest
 COPY --from=builder /LambdaNat/dist-newstyle/build/x86_64-linux/ghc-*/LambdaNat-*/x/LambdaNat-exe/build/LambdaNat-exe/LambdaNat-exe /
 
-CMD ["/LambdaNat-exe"]
+ENTRYPOINT ["/LambdaNat-exe"]
