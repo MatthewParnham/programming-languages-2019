@@ -2,7 +2,7 @@
 
 To run a program in the language LambdaNat:
 
-- Install [Docker](https://docs.docker.com/install/).
+- Install [Docker](https://docs.docker.com/install/). (On Windows make sure to run Linux containers)
 
 - Change into this folder.
 
