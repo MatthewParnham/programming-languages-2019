@@ -2,14 +2,15 @@
 -- Lambda Calculus with Natural Numbers 1
 -----------------------------------------
 
+Prog.   Program ::= Exp ; -- this first line is redundant
 EAbs.   Exp1 ::= "\\" Id "." Exp ;  -- in effect: "\" Id "." Exp ; -- btw, pronounce "\" as "lambda" in this context
 EApp.   Exp2 ::= Exp2 Exp3 ; -- application associates on the left
 EVar.   Exp3 ::= Id ;
-ENat.   Exp4 ::= Nat ;
-Nat0.   Nat ::= "0" ;
-NatS.   Nat ::= "S" Nat ; -- "S" is now a terminal and cannot be parsed (or lexed) as an identifier (variable)
+ENat.   Exp3 ::= Exp4 ;
+EZer.   Exp4 ::= "0" ;
+EInc.   Exp4 ::= "S" Exp3 ; -- "S" is now a terminal and cannot be parsed (or lexed) as an identifier (variable)
 
-coercions Exp 4 ;
+coercions Exp 3 ;
 
 token Id (letter (letter | digit | '_')*) ;
 
