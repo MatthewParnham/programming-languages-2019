@@ -4,13 +4,13 @@ FROM haskell:8.6.5 AS builder
 RUN mkdir -p /LambdaNat
 WORKDIR /LambdaNat
 
-# Install BNFC, and other needed packages 
+# Install BNFC, and other needed packages
 RUN cabal new-update
 RUN cabal new-install BNFC-2.8.3
 RUN cabal new-install alex-3.2.4 happy-1.19.12
 
 # Copy and generate grammer code
-COPY LambdaNat0.cf ./
+COPY LambdaNat1.cf ./
 RUN bnfc -m -haskell LambdaNat0.cf
 RUN make
 
