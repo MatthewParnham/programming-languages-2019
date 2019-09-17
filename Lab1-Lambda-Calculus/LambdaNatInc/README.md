@@ -1,4 +1,4 @@
-# LambdaNat0
+# LambdaNatInc
 
 To run a program in the language LambdaNat:
 
