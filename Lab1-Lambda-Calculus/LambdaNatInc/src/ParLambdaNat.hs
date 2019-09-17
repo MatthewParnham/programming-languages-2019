@@ -22,10 +22,29 @@ type HappyAny = Happy_GHC_Exts.Any
 #else
 type HappyAny = forall a . a
 #endif
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 happyIn10 :: (Id) -> (HappyAbsSyn )
 happyIn10 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyIn10 #-}
 happyOut10 :: (HappyAbsSyn ) -> (Id)
+=======
+happyIn8 :: (Id) -> (HappyAbsSyn )
+happyIn8 x = Happy_GHC_Exts.unsafeCoerce# x
+{-# INLINE happyIn8 #-}
+happyOut8 :: (HappyAbsSyn ) -> (Id)
+happyOut8 x = Happy_GHC_Exts.unsafeCoerce# x
+{-# INLINE happyOut8 #-}
+happyIn9 :: (Program) -> (HappyAbsSyn )
+happyIn9 x = Happy_GHC_Exts.unsafeCoerce# x
+{-# INLINE happyIn9 #-}
+happyOut9 :: (HappyAbsSyn ) -> (Program)
+happyOut9 x = Happy_GHC_Exts.unsafeCoerce# x
+{-# INLINE happyOut9 #-}
+happyIn10 :: (Exp) -> (HappyAbsSyn )
+happyIn10 x = Happy_GHC_Exts.unsafeCoerce# x
+{-# INLINE happyIn10 #-}
+happyOut10 :: (HappyAbsSyn ) -> (Exp)
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 happyOut10 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut10 #-}
 happyIn11 :: (Program) -> (HappyAbsSyn )
@@ -46,6 +65,7 @@ happyIn13 x = Happy_GHC_Exts.unsafeCoerce# x
 happyOut13 :: (HappyAbsSyn ) -> (Exp)
 happyOut13 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut13 #-}
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 happyIn14 :: (Exp) -> (HappyAbsSyn )
 happyIn14 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyIn14 #-}
@@ -70,6 +90,8 @@ happyIn17 x = Happy_GHC_Exts.unsafeCoerce# x
 happyOut17 :: (HappyAbsSyn ) -> (Exp)
 happyOut17 x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyOut17 #-}
+=======
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 happyInTok :: (Token) -> (HappyAbsSyn )
 happyInTok x = Happy_GHC_Exts.unsafeCoerce# x
 {-# INLINE happyInTok #-}
@@ -79,31 +101,52 @@ happyOutTok x = Happy_GHC_Exts.unsafeCoerce# x
 
 
 happyExpList :: HappyAddr
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 happyExpList = HappyA# "\x00\x00\xf2\x00\x00\xe4\x01\x00\xc8\x02\x00\x90\x05\x00\x20\x03\x00\x00\x06\x00\x80\x3c\x00\x00\x40\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x90\x05\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf2\x00\x00\x00\x00\x00\xc0\x00\x00\x00\x04\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x59\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x80\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\xf2\x00\x00\x00\x00\x00\x00\x00"#
+=======
+happyExpList = HappyA# "\x00\x20\x03\x00\x19\x00\x88\x00\x40\x04\x00\x32\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x11\x00\x00\x00\x00\x00\x00\x32\x00\x00\x01\x00\x00\x00\x44\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x08\x00\x20\x00\x00\x00\x00\x64\x00\x00\x00\x00\x00"#
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 
 {-# NOINLINE happyExpListPerState #-}
 happyExpListPerState st =
     token_strs_expected
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
   where token_strs = ["error","%dummy","%start_pProgram","%start_pExp1","%start_pExp2","%start_pExp3","%start_pExp4","%start_pNat","%start_pExp","Id","Program","Exp1","Exp2","Exp3","Exp4","Nat","Exp","'('","')'","'.'","'0'","'S'","'\\\\'","L_Id","%eof"]
         bit_start = st * 25
         bit_end = (st + 1) * 25
         read_bit = readArrayBit happyExpList
         bits = map read_bit [bit_start..bit_end - 1]
         bits_indexed = zip bits [0..24]
+=======
+  where token_strs = ["error","%dummy","%start_pProgram","%start_pExp1","%start_pExp2","%start_pExp3","%start_pExp","Id","Program","Exp1","Exp2","Exp3","Exp","'('","')'","'.'","'\\\\'","L_Id","%eof"]
+        bit_start = st * 19
+        bit_end = (st + 1) * 19
+        read_bit = readArrayBit happyExpList
+        bits = map read_bit [bit_start..bit_end - 1]
+        bits_indexed = zip bits [0..18]
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
         token_strs_expected = concatMap f bits_indexed
         f (False, _) = []
         f (True, nr) = [token_strs !! nr]
 
 happyActOffsets :: HappyAddr
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 happyActOffsets = HappyA# "\x2f\x00\x2f\x00\x3d\x00\x3d\x00\x4c\x00\x1e\x00\x2f\x00\x03\x00\x00\x00\x00\x00\x00\x00\x3d\x00\x00\x00\x00\x00\x00\x00\x0a\x00\x2f\x00\x00\x00\x1e\x00\x13\x00\x22\x00\x22\x00\x22\x00\x20\x00\x22\x00\x22\x00\x00\x00\x00\x00\x23\x00\x00\x00\x36\x00\x00\x00\x2f\x00\x00\x00\x00\x00"#
 
 happyGotoOffsets :: HappyAddr
 happyGotoOffsets = HappyA# "\x01\x00\x29\x00\x37\x00\x43\x00\x2c\x00\x33\x00\x09\x00\x00\x00\x00\x00\x00\x00\x00\x00\x46\x00\x00\x00\x00\x00\x00\x00\x00\x00\x11\x00\x00\x00\x39\x00\x40\x00\x00\x00\x00\x00\x00\x00\x46\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x19\x00\x00\x00\x00\x00"#
+=======
+happyActOffsets = HappyA# "\x23\x00\x23\x00\x1b\x00\x1b\x00\x23\x00\x03\x00\x00\x00\x00\x00\x00\x00\x1b\x00\x00\x00\x08\x00\x23\x00\x0f\x00\x14\x00\x18\x00\x14\x00\x14\x00\x00\x00\x00\x00\x22\x00\x19\x00\x00\x00\x23\x00\x00\x00\x00\x00"#
+
+happyGotoOffsets :: HappyAddr
+happyGotoOffsets = HappyA# "\x01\x00\x1f\x00\x26\x00\x2b\x00\x07\x00\x00\x00\x00\x00\x00\x00\x00\x00\x2c\x00\x00\x00\x00\x00\x0d\x00\x2d\x00\x00\x00\x2c\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x13\x00\x00\x00\x00\x00"#
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 
 happyAdjustOffset :: Happy_GHC_Exts.Int# -> Happy_GHC_Exts.Int#
 happyAdjustOffset off = off
 
 happyDefActions :: HappyAddr
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 happyDefActions = HappyA# "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf8\xff\xf2\xff\xec\xff\xf5\xff\xf3\xff\xf1\xff\xf0\xff\x00\x00\x00\x00\xee\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf7\xff\xf4\xff\x00\x00\xed\xff\x00\x00\xef\xff\x00\x00\xf6\xff"#
 
 happyCheck :: HappyAddr
@@ -113,12 +156,26 @@ happyTable :: HappyAddr
 happyTable = HappyA# "\x00\x00\x09\x00\x19\x00\x0a\x00\x0b\x00\x0c\x00\x0d\x00\x0e\x00\x1a\x00\x09\x00\x09\x00\x0a\x00\x0b\x00\x0c\x00\x0d\x00\x0e\x00\x0f\x00\x09\x00\xff\xff\x0a\x00\x0b\x00\x0c\x00\x0d\x00\x0e\x00\x1e\x00\x09\x00\x09\x00\x0a\x00\x0b\x00\x0c\x00\x0d\x00\x0e\x00\x21\x00\x11\x00\x12\x00\x13\x00\x12\x00\x13\x00\x21\x00\x09\x00\xff\xff\x09\x00\xff\xff\x18\x00\x0b\x00\x0c\x00\x0d\x00\x0e\x00\x11\x00\x15\x00\x0e\x00\x12\x00\x13\x00\x14\x00\x09\x00\x09\x00\x20\x00\x14\x00\x17\x00\x0c\x00\x0d\x00\x0e\x00\x11\x00\x1d\x00\x1c\x00\x12\x00\x13\x00\x09\x00\x09\x00\x00\x00\x09\x00\x16\x00\x0d\x00\x0e\x00\x1b\x00\x0d\x00\x0e\x00\x11\x00\x00\x00\x00\x00\x12\x00\x13\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"#
 
 happyReduceArr = Happy_Data_Array.array (7, 19) [
+=======
+happyDefActions = HappyA# "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xfa\xff\xf4\xff\xf2\xff\xf7\xff\xf5\xff\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\xf9\xff\xf6\xff\x00\x00\x00\x00\xf3\xff\x00\x00\xf8\xff"#
+
+happyCheck :: HappyAddr
+happyCheck = HappyA# "\xff\xff\x00\x00\x01\x00\x02\x00\x03\x00\x04\x00\x05\x00\x00\x00\x05\x00\x02\x00\x03\x00\x04\x00\x05\x00\x00\x00\x06\x00\x02\x00\x03\x00\x04\x00\x05\x00\x00\x00\x05\x00\x02\x00\x03\x00\x04\x00\x05\x00\x01\x00\x06\x00\x02\x00\x01\x00\x05\x00\x06\x00\x00\x00\x05\x00\x02\x00\x03\x00\x04\x00\x01\x00\x03\x00\x00\x00\x04\x00\x05\x00\x03\x00\x04\x00\x00\x00\x00\x00\x00\x00\xff\xff\x04\x00\x04\x00\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff"#
+
+happyTable :: HappyAddr
+happyTable = HappyA# "\x00\x00\x07\x00\x11\x00\x08\x00\x09\x00\x0a\x00\x12\x00\x07\x00\x07\x00\x08\x00\x09\x00\x0a\x00\x0b\x00\x07\x00\xff\xff\x08\x00\x09\x00\x0a\x00\x15\x00\x07\x00\x07\x00\x08\x00\x09\x00\x0a\x00\x18\x00\x0d\x00\xff\xff\x17\x00\x0d\x00\x07\x00\xff\xff\x07\x00\x07\x00\x10\x00\x09\x00\x0a\x00\x0d\x00\x18\x00\x07\x00\x0e\x00\x07\x00\x0f\x00\x0a\x00\x07\x00\x07\x00\x14\x00\x00\x00\x0e\x00\x13\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"#
+
+happyReduceArr = Happy_Data_Array.array (5, 13) [
+	(5 , happyReduce_5),
+	(6 , happyReduce_6),
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 	(7 , happyReduce_7),
 	(8 , happyReduce_8),
 	(9 , happyReduce_9),
 	(10 , happyReduce_10),
 	(11 , happyReduce_11),
 	(12 , happyReduce_12),
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 	(13 , happyReduce_13),
 	(14 , happyReduce_14),
 	(15 , happyReduce_15),
@@ -147,10 +204,35 @@ happyReduction_8 happy_x_1
 
 happyReduce_9 = happyReduce 4# 2# happyReduction_9
 happyReduction_9 (happy_x_4 `HappyStk`
+=======
+	(13 , happyReduce_13)
+	]
+
+happy_n_terms = 7 :: Int
+happy_n_nonterms = 6 :: Int
+
+happyReduce_5 = happySpecReduce_1  0# happyReduction_5
+happyReduction_5 happy_x_1
+	 =  case happyOutTok happy_x_1 of { (PT _ (T_Id happy_var_1)) -> 
+	happyIn8
+		 (Id (happy_var_1)
+	)}
+
+happyReduce_6 = happySpecReduce_1  1# happyReduction_6
+happyReduction_6 happy_x_1
+	 =  case happyOut13 happy_x_1 of { happy_var_1 -> 
+	happyIn9
+		 (AbsLambdaNat.Prog happy_var_1
+	)}
+
+happyReduce_7 = happyReduce 4# 2# happyReduction_7
+happyReduction_7 (happy_x_4 `HappyStk`
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 	happy_x_3 `HappyStk`
 	happy_x_2 `HappyStk`
 	happy_x_1 `HappyStk`
 	happyRest)
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
 	 = case happyOut10 happy_x_2 of { happy_var_2 -> 
 	case happyOut17 happy_x_4 of { happy_var_4 -> 
 	happyIn12
@@ -228,6 +310,57 @@ happyReduce_19 = happySpecReduce_1  7# happyReduction_19
 happyReduction_19 happy_x_1
 	 =  case happyOut12 happy_x_1 of { happy_var_1 -> 
 	happyIn17
+=======
+	 = case happyOut8 happy_x_2 of { happy_var_2 -> 
+	case happyOut13 happy_x_4 of { happy_var_4 -> 
+	happyIn10
+		 (AbsLambdaNat.EAbs happy_var_2 happy_var_4
+	) `HappyStk` happyRest}}
+
+happyReduce_8 = happySpecReduce_1  2# happyReduction_8
+happyReduction_8 happy_x_1
+	 =  case happyOut11 happy_x_1 of { happy_var_1 -> 
+	happyIn10
+		 (happy_var_1
+	)}
+
+happyReduce_9 = happySpecReduce_2  3# happyReduction_9
+happyReduction_9 happy_x_2
+	happy_x_1
+	 =  case happyOut11 happy_x_1 of { happy_var_1 -> 
+	case happyOut12 happy_x_2 of { happy_var_2 -> 
+	happyIn11
+		 (AbsLambdaNat.EApp happy_var_1 happy_var_2
+	)}}
+
+happyReduce_10 = happySpecReduce_1  3# happyReduction_10
+happyReduction_10 happy_x_1
+	 =  case happyOut12 happy_x_1 of { happy_var_1 -> 
+	happyIn11
+		 (happy_var_1
+	)}
+
+happyReduce_11 = happySpecReduce_1  4# happyReduction_11
+happyReduction_11 happy_x_1
+	 =  case happyOut8 happy_x_1 of { happy_var_1 -> 
+	happyIn12
+		 (AbsLambdaNat.EVar happy_var_1
+	)}
+
+happyReduce_12 = happySpecReduce_3  4# happyReduction_12
+happyReduction_12 happy_x_3
+	happy_x_2
+	happy_x_1
+	 =  case happyOut13 happy_x_2 of { happy_var_2 -> 
+	happyIn12
+		 (happy_var_2
+	)}
+
+happyReduce_13 = happySpecReduce_1  5# happyReduction_13
+happyReduction_13 happy_x_1
+	 =  case happyOut10 happy_x_1 of { happy_var_1 -> 
+	happyIn13
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 		 (happy_var_1
 	)}
 
@@ -260,6 +393,7 @@ happyReturn1 = \a tks -> (returnM) a
 happyError' :: () => ([(Token)], [String]) -> Err a
 happyError' = (\(tokens, _) -> happyError tokens)
 pProgram tks = happySomeParser where
+<<<<<<< HEAD:Lab1-Lambda-Calculus/LambdaNatInc/src/ParLambdaNat.hs
  happySomeParser = happyThen (happyParse 0# tks) (\x -> happyReturn (happyOut11 x))
 
 pExp1 tks = happySomeParser where
@@ -279,6 +413,21 @@ pNat tks = happySomeParser where
 
 pExp tks = happySomeParser where
  happySomeParser = happyThen (happyParse 6# tks) (\x -> happyReturn (happyOut17 x))
+=======
+ happySomeParser = happyThen (happyParse 0# tks) (\x -> happyReturn (happyOut9 x))
+
+pExp1 tks = happySomeParser where
+ happySomeParser = happyThen (happyParse 1# tks) (\x -> happyReturn (happyOut10 x))
+
+pExp2 tks = happySomeParser where
+ happySomeParser = happyThen (happyParse 2# tks) (\x -> happyReturn (happyOut11 x))
+
+pExp3 tks = happySomeParser where
+ happySomeParser = happyThen (happyParse 3# tks) (\x -> happyReturn (happyOut12 x))
+
+pExp tks = happySomeParser where
+ happySomeParser = happyThen (happyParse 4# tks) (\x -> happyReturn (happyOut13 x))
+>>>>>>> upstream/master:Lab1-Lambda-Calculus/LambdaNat0/grammar/ParLambdaNat.hs
 
 happySeq = happyDontSeq
 

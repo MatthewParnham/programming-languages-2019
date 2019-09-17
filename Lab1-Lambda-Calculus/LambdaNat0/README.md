@@ -1,6 +1,6 @@
 # LambdaNat0
 
-To run a program in the language LambdaNat:
+To parse and run a program in the language LambdaNat:
 
 - Install [Docker](https://docs.docker.com/install/). (On Windows make sure to run Linux containers)
 
