@@ -4,11 +4,11 @@ To run a program in the language LambdaNat:
 
 - Install [Docker](https://docs.docker.com/install/). (On Windows make sure to run Linux containers)
 
-- Change into this folder.
+- Enter this folder in terminal.
 
-- Run `docker build . -t lambdanat`. (may take a while)
+- Run `docker build . -t lambdanat`. (warning: may take a while since a lot has to be downloaded/built)
 
-- Run `echo "\x.x" | docker run -i --rm lambdanat` to test input.
+- Run `echo "\x.x" | docker run -i --rm lambdanat` to test that the setup is working.
 
 ## Run a File
 
