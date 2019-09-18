@@ -38,8 +38,7 @@ Given a preexisting LambdaNat project, this is all that should need to be done t
 
 - Copy over the `Dockerfile` into the root of the project.
 - Copy the contents of `LambdaNat.cabal` into the project's Cabal file, or make it if it doesn't exist.
-
-That should be all needed, as long as LambdaNat.cf is named as the interpreter expects it.
+- Make sure the name of the grammar file is `LambdaNat.cf`, or change the Dockerfile to run a differently named one. 
 
 ## Saving Image
 
