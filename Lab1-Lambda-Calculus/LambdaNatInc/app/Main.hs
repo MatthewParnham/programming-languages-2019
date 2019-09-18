@@ -32,7 +32,7 @@ run v p s = let ts = myLexer s in case p ts of
                           putStrV v $ show ts
                           putStrLn s
                           exitFailure
-           Ok  tree -> do 
+           Ok  tree -> do
                           -- putStrLn "\nParse Successful!"
                           -- showTree v tree
                           putStrLn $ printTree tree
