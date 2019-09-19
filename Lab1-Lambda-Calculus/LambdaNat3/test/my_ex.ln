@@ -1,0 +1,25 @@
+
+
+/*
+
+Basically:
+
+function(x) {
+  if (x == 0) {
+    return 1
+  } else {
+    return 0
+  }
+}
+
+*/
+
+(\x.
+  eq( x 0 )
+    0
+  else
+    S0
+  end
+)
+
+SS0

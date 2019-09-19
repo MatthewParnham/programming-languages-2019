@@ -14,9 +14,9 @@ evalCBN :: Exp -> Exp
 evalCBN (EApp e1 e2) = case (evalCBN e1) of
     (EAbs i e1') -> evalCBN (subst i e2 e1')
     e1' -> EApp e1' e2
+evalCBN (Elif e1 e2 e3 e4) = if (evalCBN e1) == (evalCBN e2) then evalCBN e3 else evalCBN e4
 evalCBN (ENatS e') = ENatS (evalCBN e')
 evalCBN x = x
-
 
 -- A quick and dirty way of getting fresh names. Rather inefficient for big terms...
 fresh_ :: Exp -> String
@@ -41,3 +41,4 @@ subst id s e@(EAbs id' e') =
         EAbs f $ subst id s e''
 subst id s (ENatS e) = ENatS (subst id s e)
 subst id s ENat0 = ENat0
+subst id s (Elif e1 e2 e3 e4) = Elif (subst id s e1) (subst id s e2) (subst id s e3) (subst id s e4)

@@ -1,0 +1,45 @@
+/*
+
+Basically:
+
+function(x) {
+  if (x == 0 or x == 1) {
+    return 1
+  } else {
+    return x
+  }
+}
+
+or really
+
+function(x) {
+  if (
+    if (x == 1) {
+      return 0
+    } else {
+      return x;
+    }
+  == 0) {
+    return 1;
+  } else {
+    return x
+  }
+}
+
+*/
+
+(\x.
+  eq (
+    eq (x S0)
+      0
+    else
+      x
+    end
+  0)
+    S0
+  else
+    x
+  end
+)
+
+0

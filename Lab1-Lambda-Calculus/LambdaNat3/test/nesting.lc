@@ -1,0 +1,15 @@
+// Alternate version of or_ex.ln, in normal syntax
+
+(\x.
+  if
+    if x = S0 then
+      0
+    else
+      x
+  = 0 then
+    S0
+  else
+    x
+)
+
+SS0

@@ -5,11 +5,12 @@
 Prog.   Program ::= Exp ;
 EAbs.   Exp1 ::= "\\" Id "." Exp ;
 EApp.   Exp2 ::= Exp2 Exp3 ;
-ENat0.  Exp3 ::= "0" ;
-ENatS.  Exp3 ::= "S" Exp3 ;
-EVar.   Exp4 ::= Id ;
+Elif.   Exp3 ::= "eq" "(" Exp3 Exp3 ")" Exp3 "else" Exp3 "end" ;
+ENat0.  Exp4 ::= "0" ;
+ENatS.  Exp4 ::= "S" Exp4 ;
+EVar.   Exp5 ::= Id ;
 
-coercions Exp 4 ;
+coercions Exp 5 ;
 
 token Id (letter (letter | digit | '_')*) ;
 
