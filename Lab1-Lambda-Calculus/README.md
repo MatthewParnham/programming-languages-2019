@@ -42,8 +42,28 @@ To **view the interpreter** find the folder `src` and open [interpreter.hs](http
 To **compile the interpreter** run (in the folder `Lab1-Lambda-Calculus/LambdaNat0`)
 
     stack build
-    
-On some installations where `stack build` fails, `cabal build` works. 
+
+If stack build fails:
+
+- In case you get something that looks like 
+
+      AesonException "Error in $.packages.cassava.constraints.flags['bytestring--lt-0_10_4']: Invalid flag name: \"bytestring--lt-0_10_4\""
+
+  run `stack upgrade`, which should tell you sth like
+
+      WARNING: Installation path /home/USERNAME/.local/bin not found on the PATH environment variable
+      New stack executable available at /home/USERNAME/.local/bin/stack
+
+   run `which stack` telling you where the current version of `stack` is. For example,
+   
+       which stack
+       /usr/bin/stack
+   
+   Copy the new version to the old version:
+
+       cp /home/USERNAME/.local/bin /usr/bin/stack
+       
+- On some installations where `stack build` fails, `cabal build` works. 
     
 To **write a program** open a text editor and save the file in the folder `test` as, say, `myprogram.lc`. Or use one of the programs already available in the folder `test`.
 
@@ -78,38 +98,38 @@ The Work Cycle that was used to produce all the different programming languages 
 
 (If you find this boring, feel free to jump to the next section and come back here for reference as needed.)
 
-Here we assume that we have `LambdaNat42` and want to build a new language called `LambdaNat43`.
+Here we assume that we have `LambdaNatOLD` and want to build a new language called `LambdaNatNEW`.
 
-1) Choose a subdirectory, that is, an already existing programming language. For the sake of concreteness, let us assume that this language is in a folder called `LambdaNat42`.
+1) Choose a subdirectory, that is, an already existing programming language. For the sake of concreteness, let us assume that this language is in a folder called `LambdaNatOLD`.
 
-2) Copy the directory `LambdaNat42` and all its content to a new folder called `LambdaNat43`.
+2) Copy the directory `LambdaNatOLD` and all its content to a new folder called `LambdaNatNEW`.
 
-3) Go to `LambdaNat43/grammar` and rename the grammar `LambdaNat42.cf` to `LambdaNat43.cf`. 
+3) Go to `LambdaNatNEW/grammar` and rename the grammar `LambdaNatOLD.cf` to `LambdaNatNEW.cf`. 
 
-   (You have to be careful if you want to choose a more descriptive name. The reason is that bnfc produces files and the names of these files need to be known to `stack` when you build the interpreter. You could use `LambdaNat.NewFeature.cf`.)
+   - (You have to be careful if you want to choose a more descriptive name. The reason is that bnfc produces files and the names of these files need to be known to `stack` when you build the interpreter. You could use `LambdaNat.NewFeature.cf`.)
 
-4) Change `LambdaNat43.cf` according to what you want to achieve. 
+   - (This step is only needed if you want to make your own grammar. In the exercises for this lab, the new grammars are already given.)
+
+4) Change `LambdaNatNEW.cf` according to what you want to achieve. 
 
 5) To build the parser:
 
-    a) Run `bnfc -m -haskell LambdaNat43.cf`.
+    a) Run `bnfc -m -haskell LambdaNatNEW.cf`.
     
     b) Run `make`. 
 
 6) Write programs and parse them in the new language as explained. 
    If not all tests run according to what you expect go back to 4).
 
-7) 
-
-  a) Run `cp *.hs ../src`. (Do a `mkdir ../src` before if necessary.) This copies the files produced by bnfc into the `src` folder that will contain the new interpreter. Run `cd ../src`.
-    
-  b) Copy the old interpreter  in `LambdaNat42/src/Interpreter.hs` to `LambdaNat43/src/Interpreter.hs` in the new `src` folder. 
+7) Now we need to copy the old interpreter and the new grammar into the folder of the new interpreter. `cd` into `LambdaNatNEW`.
+  a) Run `cp grammar/*.hs src`. (Do a `mkdir src` before if necessary.) This copies the Haskell-files produced by bnfc into the `src` folder that will contain the new interpreter. 
+  b) Copy the old interpreter  in `../LambdaNatOLD/src/Interpreter.hs` to `src/Interpreter.hs`. 
 
 8) Study how the interpreter `Interpreter.hs` uses the constructors of `AbsLambdaNat.hs` in order to evaluate the abstract syntax trees. Modify the old interpreter so that it can evaluate the new constructors of the new `AbsLambdaNat.hs` (this can take a while and is the item that may require the largest amount of work).
 
-9) Run `../stack build`. Debug the interpreter if it does not compile. 
+9) Run `stack build`. Debug the interpreter if it does not compile. 
 
-10) Write a test program and save it in test/test.lc. Run the test program via `../stack exec LambdaNewfeature-exe ../test/test.lc'. 
+10) Write a test program and save it in test/test.lc. Run the test program via `../stack exec LambdaNat-exe ../test/test.lc`. 
 If not all tests run according to what you expect go back to 7).
 
 11) Release your new programming language.
@@ -177,7 +197,7 @@ Let us go through this step by step
   
         e ::= \ x. e | e e | x | 0 | S e
 
-    where now `S` can be followed by any expression.
+    where now `S` can be followed by any expression. This is the grammar available in [`LambdaNat2`](https://github.com/alexhkurz/programming-languages-2019/blob/master/Lab1-Lambda-Calculus/LambdaNat2/grammar/LambdaNat2.cf).
 
   - We can use the grammar
 
@@ -209,12 +229,18 @@ Adding `0 | S e` to BNFC leads us to add to the following, see [`LambdaNat2.cf`]
     ENat0.  Exp3 ::= "0" ;
     ENatS.  Exp3 ::= "S" Exp3 ; 
 
-This means that compared to [`LambdaNat0.cf`](), we have to more rules named `ENat0` and `ENatS`. Accordingly, we need to add to the [interpreter of LambdaNat0]() two cases. 
+This means that compared to [`LambdaNat0.cf`](), we have to more rules named `ENat0` and `ENatS`. Accordingly, we need to add to the old interpreter two cases. 
 
     evalCBN (ENatS e) = ENatS (evalCBN e)
     evalCBN ENat0 = ENat0
 
-and similarly in the code for substitution
+These need to be inserted before
+
+    evalCBN x = x
+
+which is a catch-all clause.
+
+Similarly in the code for substitution
 
     subst id s (ENatS e) = ENatS (subst id s e) 
     subst id s ENat0 = ENat0 
@@ -231,13 +257,17 @@ as output.
 
 ## From LambdaNat2 to LambdaNat3 (conditionals)
 
-We go through the Work Cycle to add if-then-else. As abstract syntax we may choose (fill in the dots)
+We go through the Work Cycle to add if-then-else. 
 
-        e ::= \ x. e | e e | x | 0 | S e | ...
+Start at Work Cycle 5b. `LambdaNatOld` is `LambdaNat2`. You can start from [`../Lab1-solutions/LambdaNat2](https://github.com/alexhkurz/programming-languages-2019/tree/master/Lab1-solutions/LambdaNat2).
 
-If you want to see my grammar you find it in the usual place. You will need to know the grammar, when are going to write an actual program in the language. 
+As abstract syntax we may choose (fill in the dots)
 
-But to modify the interpreter so that it can deal with if-then-else, we only need to know that in the definition of the abstact syntax in [AbsLambdaNat](), there is one new case now, namely 
+        e ::= \ x. e | e e | x | 0 | S e | ... 
+
+If you want to see my grammar you find it in `LambdaNat3/grammar`. You will need to know the grammar, when are going to write an actual program in the language. 
+
+But to modify the interpreter so that it can deal with if-then-else, we only need to know that in the definition of the abstact syntax in `LambdaNat3/grammar/AbsLambdaNat.hs`, there is one new case now, namely 
 
         EIf Exp Exp Exp Exp
 

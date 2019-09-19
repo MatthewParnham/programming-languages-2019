@@ -8,6 +8,13 @@ I don't use Windows, so I am dependent on your feedback to put more information 
 
 Install Linux from the Windows store and continue to follow the instructions for Linux/MacOS in the next section ... this maybe preferable as it puts us all on the same page ... specifically there is the Windows Subsystem for Linux (WSL). Any Windows 10 user can install WSL on their pc. 
 
+This video may help to install the [Haskell Platform in WSL](https://www.youtube.com/watch?v=aC3-Ur-mNM0). The short version is:
+
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install haskell-platform
+    sudo apt install haskell-stack
+
 ## Working under Linux/MacOS
 
 Installing BNFC under Linux/MacOS requires installing the programming language [Haskell](https://www.haskell.org/) first. You also need the package management system [Cabal](https://www.haskell.org/cabal/), but it is already part of the Haskell platform. So the first step should be:
@@ -30,7 +37,7 @@ After calling `make` I get a long list of output finishing with
 
            make: *** [internal-tests] Error 1
         
-As far as I understand the missing dependencies and the error can be ignored as long as the executable `bnfc` was generated.
+As far as I understand the missing dependencies and the error can be ignored as long as the executable `bnfc` was generated. 
 
 Use your file browser to find where the exectuable `bnfc` is. I found it as `bnfc/source/dist/build/bnfc` (the first occurrence of `bnfc` refers to the directory cloned from github, the second occurrence refers to the executable).
 
@@ -53,7 +60,7 @@ The next step is to create an interpreter that is able to perform computations s
   
 (You may want to open `Interpreter.hs` in a text editor ... if you have never seen Haskell before, I hope you are impressed by how simple it is ... essentially just 5 lines of code.)
 
-Modifying `TestCalc.hs` so that instead of printing the abstract syntax tree it is interpreting the code, we obtain the file [`Calculator.hs`](https://github.com/alexhkurz/programming-languages-2019/blob/master/Calculator.hs). <sup>[[3]](#footnote)</sup> It is important to import the interpreter and replace the main function (also consider that indentation can make a difference in Haskell).
+Modifying `TestCalc.hs` so that instead of printing the abstract syntax tree it is interpreting the code, we obtain the file [`Calculator.hs`](https://github.com/alexhkurz/programming-languages-2019/blob/master/Calculator/Calculator.hs). <sup>[[3]](#footnote)</sup> It is important to import the interpreter and replace the main function (also consider that indentation can make a difference in Haskell).
   
     ghc --make Calculator.hs
     echo "1 + 2 * 3" | ./Calculator
