@@ -9,4 +9,3 @@
 //let rec f = \ l . if l = # then 0 else if l = # then f (tl l) else S 0 in f a:b:#
 //Plus:(N1:#):(Times:(N2:#):(N3:#):#):#
 //Plus:N1:(Times:N2:N3)
-
