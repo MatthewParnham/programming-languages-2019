@@ -4,21 +4,19 @@ FROM haskell:8.6.5 AS parser
 RUN mkdir -p /LambdaNat
 WORKDIR /LambdaNat
 
-# Install dependancies
+# Install BNFC
 COPY LambdaNat.cabal ./
 RUN cabal new-update && cabal new-install BNFC-2.8.3 alex-3.2.4 happy-1.19.12
 
 # Copy, generate and build grammer code
 COPY grammar ./grammar
-RUN cd grammar && bnfc -m -haskell LambdaNat5.cf && make && cd ..
+RUN cd grammar && bnfc -m -haskell LambdaNat4.cf && make && cd ..
 
-#CMD ["./grammar/TestLambdaNat"] # CMD only for testing parser
+CMD ["./grammar/TestLambdaNat"] # CMD only for testing parser
 
 
 # Stage 2, build the full executable with interpreter
 From parser AS full
-
-RUN cabal new-build --only-dependencies
 
 # Copy some unused directories, but needed
 COPY test ./test
