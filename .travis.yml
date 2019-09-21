@@ -5,11 +5,11 @@ services:
 
 env:
   global:
-    CACHE_IMAGE: mjhea0/docker-ci-cache
+    CACHE_IMAGE: jhburns/docker-ci-cache
 
 before_script:
   - docker pull $CACHE_IMAGE:latest || true
-  - cd ./Assignment
+  - cd ./Assignment0
 
 script:
   - docker build --cache-from $CACHE_IMAGE:latest --tag $CACHE_IMAGE:latest .
