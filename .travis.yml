@@ -15,5 +15,5 @@ script:
   - docker build --cache-from $CACHE_IMAGE:latest --tag $CACHE_IMAGE:latest . --target=test
 
 after_success:
-  - docker login -u $REGISTRY_USER -p $REGISTRY_PASS
-  - docker push $CACHE_IMAGE:latest
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then docker login -u $REGISTRY_USER -p $REGISTRY_PASS ; fi'
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then docker push $CACHE_IMAGE:latest ; fi;
