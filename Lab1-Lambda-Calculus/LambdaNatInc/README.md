@@ -22,7 +22,7 @@ Can be used to only build up to the parser stage, see [Docker multi-stage builds
 
 ## Run a File
 
-Easiest way to run a file is with `cat test/test-xxyz.lc | docker run -i --rm lambdanat`.
+Easiest way to run a file is with `cat test/test-xxyz.lc | docker run -i --rm lambdaparse`.
 
 ## Debug
 
