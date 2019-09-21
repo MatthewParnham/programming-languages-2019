@@ -1,68 +1,45 @@
-cabal-version: 1.12
+FROM haskell:8.6.5 AS parser
 
--- This file has been generated from package.yaml by hpack version 0.31.0.
---
--- see: https://github.com/sol/hpack
---
--- hash: d652f0e9982a94ed1aaa4c60756cce0dbe995cd17b8c7a3933985bf5ef0f62e0
+# Create and move into project folder
+RUN mkdir -p /LambdaNat
+WORKDIR /LambdaNat
 
-name:           LambdaNat
-version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/LambdaNat#readme>
-homepage:       https://github.com/githubuser/LambdaNat#readme
-bug-reports:    https://github.com/githubuser/LambdaNat/issues
-author:         Author name here
-maintainer:     example@example.com
-copyright:      2019 Author name here
-license:        BSD3
-license-file:   LICENSE
-build-type:     Simple
-extra-source-files:
-    README.md
-    ChangeLog.md
+# Install BNFC
+COPY LambdaNat.cabal ./
+RUN cabal new-update && cabal new-install BNFC-2.8.3 alex-3.2.4 happy-1.19.12
 
-source-repository head
-  type: git
-  location: https://github.com/githubuser/LambdaNat
+# Copy, generate and build grammer code
+COPY grammar ./grammar
+RUN cd grammar && bnfc -m -haskell LambdaNat.cf && make && cd ..
 
-library
-  exposed-modules:
-      AbsLambdaNat, ErrM, LexLambdaNat, ParLambdaNat, PrintLambdaNat, Interpreter
-  other-modules:
-      Paths_LambdaNat
-  hs-source-dirs:
-      src
-  build-depends:
-      base >=4.7 && <5
-    , array
-    , containers
-    , mtl
-  default-language: Haskell2010
+CMD ["./grammar/TestLambdaNat"] # CMD only for testing parser
 
-executable LambdaNat-exe
-  main-is: Main.hs
-  other-modules:
-      Paths_LambdaNat
-  hs-source-dirs:
-      app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -optl-static -optl-pthread
-  build-depends:
-      LambdaNat
-    , base >=4.7 && <5
-  default-language: Haskell2010
 
-test-suite LambdaNat-test
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  other-modules:
-      Paths_LambdaNat
-  hs-source-dirs:
-      test
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N -optl-static -optl-pthread
-  build-depends:
-      base >=4.7 && <5
-    , LambdaNat
-    , filepath
-    , directory
-    , mtl
-  default-language: Haskell2010
+# Stage 2, build the full executable with interpreter
+From parser AS full
+
+# Copy some unused directories, but needed
+COPY test ./test
+COPY LICENSE .
+
+# Move generated grammer to src directory
+RUN mkdir ./src && cp -r /LambdaNat/grammar/*.hs ./src && cp -r /LambdaNat/grammar/*.x ./src
+
+# Copy application code
+COPY app ./app
+COPY src ./src
+
+# Compile everything
+RUN cabal new-build
+
+# Cabal needs 'new-exe' or it won't be able to find the executable
+CMD ["cabal", "new-exec", "LambdaNat-exe"]
+
+
+# Stage 2, pure binary
+FROM scratch
+
+# Copy ONLY the single binary
+COPY --from=full /LambdaNat/dist-newstyle/build/x86_64-linux/ghc-*/LambdaNat-*/x/LambdaNat-exe/build/LambdaNat-exe/LambdaNat-exe /
+
+ENTRYPOINT ["/LambdaNat-exe"] # ENTRYPOINT used so the image behaves as a binary
