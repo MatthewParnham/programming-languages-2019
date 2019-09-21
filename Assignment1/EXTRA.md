@@ -8,4 +8,3 @@ first: https://help.github.com/en/articles/configuring-a-remote-for-a-fork
 
 then: https://help.github.com/en/articles/syncing-a-fork
 
-test
