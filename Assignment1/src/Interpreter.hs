@@ -36,6 +36,7 @@ evalCBN (EMinusOne e) = case (evalCBN e) of
     ENat0 -> ENat0
     (ENatS e) -> e
 evalCBN (ENatS e') = ENatS (evalCBN e')
+-- Added info
 evalCBN x = x
 
 newtype IDM m a = IDM{unIDM :: m}
